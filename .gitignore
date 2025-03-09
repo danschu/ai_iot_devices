@@ -3,10 +3,22 @@
 dataset/
 model/
 packages/*
-Ubuntu_HailoAI/
 model*.hef
 model*.har
 venv*/
+
+hailoai/model*.hef
+hailoai/model*.har
+hailoai/*.log
+hailoai/venv*/
+hailoai/packages/
+hailoai/Ubuntu_HailoAI/
+edgetpu/venv*/
+edgetpu/packages/
+edgetpu/Ubuntu_edgetpu/
+train/venv*/
+train/dataset/
+train/train/
 
 
 # Byte-compiled / optimized / DLL files

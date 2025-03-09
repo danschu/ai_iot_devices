@@ -4,7 +4,7 @@ import onnxruntime # pip install onnxruntime
 import os
 import time
 
-modelfile = "./model/input_model.onnx"
+modelfile = "../model/trained_model.onnx"
 
 for prov in ["CPUExecutionProvider", "DmlExecutionProvider"]: 
     session = onnxruntime.InferenceSession(modelfile, providers=[prov])

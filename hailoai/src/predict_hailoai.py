@@ -7,7 +7,7 @@ import cv2
 
 
 # Loading compiled HEFs to device:
-hef_path = "model.hef"
+hef_path = "./model.hef"
 hef = HEF(hef_path)
     
 # The target can be used as a context manager ("with" statement) to ensure it's released on time.
@@ -34,7 +34,7 @@ with VDevice(params) as target:
     print(output_vstream_info.shape)
 
     
-    img_orig = cv2.imread("./dataset/bdd100k/images/100k/test/cb4bfc16-80e9d4a2.jpg")
+    img_orig = cv2.imread("../dataset/bdd100k/images/100k/test/cb4bfc16-80e9d4a2.jpg")
 
     with InferVStreams(network_group, input_vstreams_params, output_vstreams_params) as infer_pipeline:
         with network_group.activate(network_group_params):

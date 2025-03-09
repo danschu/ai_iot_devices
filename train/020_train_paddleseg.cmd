@@ -3,13 +3,18 @@
 SET VENV_DIR=venv_win_train
 SET SRC_DIR=src
 SET DATASET_DIR=dataset
+SET TRAIN_DIR=train
 
 if not exist .\%VENV_DIR% (
-	echo preparing virtual environment
+	echo Preparing virtual environment...
 	py -3.11 -m venv %VENV_DIR%
 	if not exist .\%VENV_DIR% (
 		exit /B
 	)
+)
+
+if not exist .\%TRAIN_DIR% (
+	mkdir .\%TRAIN_DIR%
 )
 
 call .\%VENV_DIR%\scripts\activate.bat
@@ -25,8 +30,8 @@ if not exist .\%VENV_DIR%\Lib\site-packages\paddleseg\ (
 
 set CUDA_VISIBLE_DEVICES=0
 python .\%SRC_DIR%\train.py ^
-       --config .\%SRC_DIR%\pp_liteseg.yml ^
+       --config .\%SRC_DIR%\pp_liteseg_small.yml ^
        --save_interval 100 ^
-       --save_dir %DATASET_DIR%\train ^
+       --save_dir %TRAIN_DIR% ^
 	   --do_eval ^
 	   --use_vdl

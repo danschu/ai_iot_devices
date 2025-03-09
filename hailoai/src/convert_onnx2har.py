@@ -1,7 +1,7 @@
 import os
 import onnx
 
-model_file = "./model/input_model.onnx"
+model_file = "../model/trained_model.onnx"
 
 onnx_model = onnx.load(model_file)
 onnx_inputs = [x.name for x in onnx_model.graph.input]
