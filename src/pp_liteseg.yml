@@ -1,0 +1,68 @@
+batch_size: 8
+iters: 1600000
+
+train_dataset:
+  type: Dataset
+  dataset_root: ./dataset
+  train_path: ./dataset/train_list.txt
+  num_classes: 2
+  mode: train
+  transforms:
+    - type: Resize
+      target_size: [1280, 720]
+    - type: RandomHorizontalFlip
+    - type: RandomBlur
+      prob: 0.2
+    - type: RandomNoise
+      prob: 0.2
+      max_sigma: 5
+    - type: RandomDistort
+    - type: ResizeStepScaling
+      min_scale_factor: 1.0
+      max_scale_factor: 1.2
+      scale_step_size: 0.1 
+    - type: RandomPaddingCrop
+      crop_size: [1280, 720]
+      im_padding_value: 0
+    - type: Normalize
+      mean: [0, 0, 0]
+      
+
+val_dataset:
+  type: Dataset
+  dataset_root: ./dataset
+  val_path: ./dataset/val_list.txt
+  num_classes: 2
+  mode: val
+  transforms:
+    - type: Resize
+      target_size: [1280, 720]
+    - type: Normalize
+      mean: [0, 0, 0]
+
+optimizer:
+  type: SGD
+  momentum: 0.9
+  weight_decay: 4.0e-5
+
+lr_scheduler:
+  type: PolynomialDecay
+  learning_rate: 0.01
+  end_lr: 0
+  power: 0.9
+
+loss:
+  types:
+    - type: MixedLoss
+      losses:
+        - type: CrossEntropyLoss
+        - type: LovaszSoftmaxLoss
+      coef: [0.8, 0.2]
+  coef: [1, 1, 1]
+
+
+model:
+  type: PPLiteSeg
+  backbone:
+    type: STDC2
+    pretrained: https://bj.bcebos.com/paddleseg/dygraph/PP_STDCNet2.tar.gz
