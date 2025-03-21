@@ -1,4 +1,4 @@
-# Image segmrntation on IoT devices on windows
+# Image segmentation on IoT devices
 
 ## 1) Train and test a segmentation model which detects cars and pedestrians
 
