@@ -34,3 +34,4 @@ paddle2onnx --model_dir .\%TRAIN_DIR% ^
             --model_filename model.pdmodel ^
             --params_filename model.pdiparams ^
             --save_file .\%MODEL_OUTDIR%\trained_model.onnx
+			
